@@ -29,9 +29,3 @@ export async function authenticateUser({auth_user}){
     return user;
 }
 
-export function checkAuthLoader(){
-    const token = getLocalStorageToken('token');
-    if (!token) {
-        return redirect('/')
-    }
-}

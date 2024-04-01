@@ -1,9 +1,8 @@
 import { redirect } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
-import { setLocalToken } from "../util/local_storage";
+import { getLocalStorageToken, setLocalToken } from "../util/local_storage";
 import { authenticateUser } from "../util/auth";
 import LoginForm from "../components/LoginForm";
-import ErrorElement from "./ErrorPage";
 
 export default function LoginPage(){
     return(
@@ -32,5 +31,13 @@ export async function authenticateUserAction({request}){
     setLocalToken(user.token);
     // localStorage.setItem('token', user.token);
 
-    return redirect('/dashboard');
+    return redirect('/user');
+}
+
+export function loader(){
+    const token = getLocalStorageToken();
+    if (token) {
+        return redirect('/user')
+    }
+    return null
 }

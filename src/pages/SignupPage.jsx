@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 import SignupForm from "../components/SignupForm";
 import { uploadData } from "../util/http_requests";
-import { cheapTokenCreator } from "../util/local_storage";
+import { cheapTokenCreator, getLocalStorageToken } from "../util/local_storage";
 
 export default function SignupPage(){
     return(
@@ -30,4 +30,12 @@ export async function createUserAction({request}){
     await uploadData({data: userData, filePath: 'users.json'});
 
     return redirect('/login');
+}
+
+export function loader(){
+    const token = getLocalStorageToken();
+    if (token) {
+        return redirect('/user')
+    }
+    return null
 }

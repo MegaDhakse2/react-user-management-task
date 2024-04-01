@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 
 export function setLocalToken(token){
     localStorage.setItem('token', token);
@@ -14,6 +15,8 @@ export function getLocalStorageToken(){
     return token;
 }
 
-export function tokenLoader(){
-    return getLocalStorageToken();
-}
+// export function tokenLoader(){
+//     const token = getLocalStorageToken();
+//     console.log(token, 'token');
+//     return token;
+// }

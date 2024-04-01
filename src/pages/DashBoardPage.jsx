@@ -1,6 +1,5 @@
 import { redirect, useLoaderData } from "react-router-dom";
 import { fetchData } from "../util/http_requests"
-import { checkAuthLoader } from "../util/auth";
 import { getLocalStorageToken } from "../util/local_storage";
 import { useEffect } from "react";
 
@@ -23,10 +22,7 @@ export default function DashBoardPage(){
 }
 
 export async function fetchUsers(){
-    const token = getLocalStorageToken('token');
-    if (!token) {
-        return redirect('/')
-    }
+
     const rawUsers = await fetchData({filePath: 'users.json'});
     const users = Object.values(rawUsers)
 

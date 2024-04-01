@@ -14,10 +14,11 @@ export default function MainNavigation(){
                 </>
                 :
                 <>
-                 <span><Link to='/profile'>My Profile</Link></span>
+                 <span><Link to='/user/profile'>My Profile</Link></span>
                  <span>'   ' </span>
+                 <span><Link to='/user/dashboard'>Dashboard</Link></span>
                  <span>
-                    <Form method="post" action='/logout'>
+                    <Form method="post" action='/user/logout'>
                         <button>Logout</button>
                     </Form>
                     </span>
