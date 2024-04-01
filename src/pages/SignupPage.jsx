@@ -15,16 +15,21 @@ export default function SignupPage(){
     )
 }
 
-export async function createUserAction({request}){
+export async function action({request}){
     const data = await request.formData();
 
     const userData = {
+        full_name: data.get('full_name'),
         email : data.get('email'),
         password : data.get('password'),
         confirm_password : data.get('confirm_password'),
         token: cheapTokenCreator(data.get('email')),
+        role: 'user'
     }
-
+    if (userData.email === 'mega5admin@gmail.com') {
+        userData.role = 'superAdmin'
+    }
+    
     console.log('userData on submit signup form', userData);
     
     await uploadData({data: userData, filePath: 'users.json'});

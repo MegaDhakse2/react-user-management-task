@@ -15,7 +15,7 @@ export default function LoginPage(){
     )
 }
 
-export async function authenticateUserAction({request}){
+export async function action({request}){
     const data = await request.formData();
 
     const requestedUser = {

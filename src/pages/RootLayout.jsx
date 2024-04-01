@@ -17,9 +17,8 @@ export default function RootLayout(){
 
 export function loader(){
     const token = getLocalStorageToken();
-    console.log(token, 'token');
-    if (!token) {
-       
+    if (token) {
+        return redirect('/user');
     }
     return token;
 }

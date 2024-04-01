@@ -21,7 +21,7 @@ export default function DashBoardPage(){
     )
 }
 
-export async function fetchUsers(){
+export async function loader(){
 
     const rawUsers = await fetchData({filePath: 'users.json'});
     const users = Object.values(rawUsers)

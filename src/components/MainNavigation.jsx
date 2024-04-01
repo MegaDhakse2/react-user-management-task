@@ -1,8 +1,11 @@
 import { Link, Form, useRouteLoaderData } from "react-router-dom"
+import { getLocalStorageToken } from "../util/local_storage"
 
 export default function MainNavigation(){
-    const userToken = useRouteLoaderData('root');
+    // const userToken = useRouteLoaderData('root');
+    const userToken = getLocalStorageToken();
 
+    console.log(userToken)
     return(
         <>  {
             !userToken 
@@ -11,6 +14,7 @@ export default function MainNavigation(){
                  <span><Link to='/signup'>Signup</Link></span>
                  <span>'   ' </span>
                  <span><Link to='/login'>Login</Link></span>
+                 
                 </>
                 :
                 <>
