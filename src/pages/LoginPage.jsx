@@ -3,6 +3,9 @@ import PageLayout from "../components/PageLayout";
 import { getLocalStorageToken, setLocalToken } from "../util/local_storage";
 import { authenticateUser } from "../util/auth";
 import LoginForm from "../components/LoginForm";
+import dataStore from "../store";
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/user";
 
 export default function LoginPage(){
     return(
@@ -17,20 +20,21 @@ export default function LoginPage(){
 
 export async function action({request}){
     const data = await request.formData();
-
     const requestedUser = {
         email : data.get('email'),
         password : data.get('password'),
     }
+
     console.log('userData on Login form', requestedUser);
 
     const user = await authenticateUser({auth_user: requestedUser});
-    // set to state
+
+    // set currentUser
+    dataStore.dispatch(userActions.setCurrentUser({user}));
+    localStorage.setItem('currentUser', JSON.stringify(user));
 
     // set Token
     setLocalToken(user.token);
-    // localStorage.setItem('token', user.token);
-
     return redirect('/user');
 }
 

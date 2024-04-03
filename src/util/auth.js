@@ -25,7 +25,7 @@ export async function authenticateUser({auth_user}){
                 },{status: 422}
                 )
     }
-
+    
     return user;
 }
 

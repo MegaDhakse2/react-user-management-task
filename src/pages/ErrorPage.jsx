@@ -1,3 +1,4 @@
+import ErrorElement from "../components/ErrorElement";
 import PageLayout from "../components/PageLayout";
 
 import { useRouteError } from 'react-router-dom';
@@ -23,12 +24,7 @@ export default function ErrorPage() {
   }
 
   return (
-    <>
-      <PageLayout>
-        <h3>{title}</h3>
-        <p>{message}</p>
-      </PageLayout>
-    </>
+      <ErrorElement title={title} message={message}/>
   );
 }
 
