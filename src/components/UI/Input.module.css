@@ -1,0 +1,13 @@
+ .label, 
+ .input{
+  display: block;
+  width: 80%;
+}
+
+.input {
+    font: inherit;
+    padding: 0.25rem;
+    margin-bottom: 2%;
+    border: solid 1px #4cb8d9;
+    border-radius: 6px;
+} 

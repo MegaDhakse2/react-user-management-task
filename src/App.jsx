@@ -1,20 +1,23 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import RootLayout, {loader as rootLoader} from "./pages/RootLayout";
-import SignupPage, { loader as signupLoader } from './pages/SignupPage';
-import LoginPage, { action as authenticateUserAction, loader as loginLoader } from './pages/LoginPage';
-import DashBoardPage, { loader as fetchUsers } from './pages/DashBoardPage';
+import RootLayout, {loader as rootLoader} from "./pages/Layout/RootLayout";
+import SignupPage, { loader as signupLoader } from './pages/auth/SignupPage';
+import LoginPage, { action as authenticateUserAction, loader as loginLoader } from './pages/auth/LoginPage';
+import DashBoardPage, { loader as fetchUsers } from './pages/user/DashBoardPage';
 import ErrorPage from './pages/ErrorPage';
-import { logoutAction, loader as logoutLoader } from './pages/Logout';
-import ProfilePage from './pages/ProfilePage';
-import UsersLayout, { loader as manageUsersPageLoader } from './pages/UsersLayout';
-import AdminPanelPage, {loader as adminPanelLoader} from './pages/AdminPanelPage';
-import ManageUsersPage, {loader as usersLoader} from './pages/ManageUsersPage';
-import NewUserPage from './pages/NewUserPage';
+import { logoutAction, loader as logoutLoader } from './pages/auth/Logout';
+import ProfilePage from './pages/user/ProfilePage';
+import UserLayout, { loader as userLayoutLoader } from './pages/Layout/UserLayout';
+import AdminPanelPage, {loader as adminPanelLoader} from './pages/admin/AdminPanelPage';
+import ManageUsersPage, {loader as manageUsersLoader} from './pages/admin/ManageUsersPage';
+import NewUserPage from './pages/admin/NewUserPage';
 import {action as formUserAction,} from './components/UserForm';
-import UserDetailPage, {loader as fetchIndividualUser, action as userDeleteAction} from './pages/UserDetailPage';
-import EditUserPage from './pages/EditUserPage';
+import UserDetailPage, {loader as fetchIndividualUser, action as userDeleteAction} from './pages/admin/UserDetailPage';
+import EditUserPage from './pages/admin/EditUserPage';
+import WelcomePage from './pages/Layout/WelcomePage';
+import UserHomePage from './pages/Layout/UserHomePage';
+import AdminHomePage from './pages/admin/AdminHomePage';
 
-const router= createBrowserRouter(
+export const router= createBrowserRouter(
   [
     {
       path: '/',
@@ -22,6 +25,10 @@ const router= createBrowserRouter(
       id: 'root',
       loader: rootLoader,
       children:[
+        {
+          index: true,
+          element: <WelcomePage/>,
+        },
         { path: 'signup',
           element: <SignupPage/>,
           action: formUserAction,
@@ -38,14 +45,18 @@ const router= createBrowserRouter(
     {
       path: '/user',
       element: 
-        <UsersLayout/>,
-      loader: manageUsersPageLoader,
+        <UserLayout/>,
+      loader: userLayoutLoader,
       children:[
+        {
+          index:true,
+          element:<UserHomePage/>
+        },
         { 
           path: 'dashboard',
           element: <DashBoardPage/>,
-          id:'user_dashboard',
-          loader: fetchUsers
+          // id:'user_dashboard',
+          // loader: fetchUsers
         },
         { path: 'profile',
           element: <ProfilePage/>,
@@ -56,9 +67,13 @@ const router= createBrowserRouter(
           loader: adminPanelLoader,
           children:[
             {
+              index:true,
+              element: <AdminHomePage/>
+            },
+            {
               path: 'users',
               element: <ManageUsersPage/>,
-              loader: usersLoader
+              loader: manageUsersLoader
             },
             { 
               path: 'users/:userId',
@@ -91,6 +106,7 @@ const router= createBrowserRouter(
     
   ]
 )
+
 
 export default function App(){
   return(

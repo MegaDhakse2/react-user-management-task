@@ -1,6 +1,8 @@
 import { Link, useSubmit } from "react-router-dom";
+import Profile from "./Profile";
+import classes from './UserItem.module.css';
 
-export function UserItem({user}){
+export function  UserItem({user}){
   const submit = useSubmit();
 
   function startDeleteHandler() {
@@ -11,10 +13,12 @@ export function UserItem({user}){
   }
 
     return(
-        <>
-            <p>{user.full_name}</p>
-            <Link to="edit">Edit</Link>
-            <button onClick={startDeleteHandler}>Delete User</button>
-        </>
+        <div className={classes.user_item}>
+            <Profile user={user}/>
+            <div className={classes.actions}>
+              <button className={classes.edit_but}><Link to="edit">Edit</Link></button>
+              <button className={classes.delete_but} onClick={startDeleteHandler}>Delete User</button>
+            </div>
+        </div>
     )
 }

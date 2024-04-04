@@ -1,6 +1,6 @@
 import { Link, Outlet, useLoaderData, useRouteLoaderData } from "react-router-dom";
-import UsersList from "../components/UsersList";
-import { fetchData } from "../util/http_requests";
+import UsersList from "../../components/UsersList";
+import { fetchData } from "../../util/http_requests";
 
 export default function ManageUsersPage(){
   const users = useLoaderData();
@@ -8,8 +8,6 @@ export default function ManageUsersPage(){
   console.log(users, 'users from admin users page');
     return(
         <> 
-          <br/>
-          <Link to='/user/admin/newuser'>Create New User</Link>
           <UsersList users={users}/>
           <Outlet/>
         </>

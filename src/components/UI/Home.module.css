@@ -1,0 +1,14 @@
+.getStarted{
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    background-color: transparent;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: larger;
+}
+
+.getStarted:hover{
+    background-color: chocolate;
+}

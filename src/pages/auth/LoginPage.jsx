@@ -1,20 +1,19 @@
 import { redirect } from "react-router-dom";
-import PageLayout from "../components/PageLayout";
-import { getLocalStorageToken, setLocalToken } from "../util/local_storage";
-import { authenticateUser } from "../util/auth";
-import LoginForm from "../components/LoginForm";
-import dataStore from "../store";
-import { useDispatch } from "react-redux";
-import { userActions } from "../store/user";
+import { getLocalStorageToken, setLocalToken } from "../../util/local_storage";
+import { authenticateUser } from "../../util/auth";
+import LoginForm from "../../components/LoginForm";
+import dataStore from "../../store";
+import { userActions } from "../../store/user";
+import classes from './LoginPage.module.css';
 
 export default function LoginPage(){
     return(
-        <PageLayout>
             <div>
-              <h2>This is Login Page</h2>
+              <div className={classes.heading}>
+              <h2>Login Here</h2>
+              </div>
               <LoginForm/>
             </div>
-        </PageLayout>
     )
 }
 

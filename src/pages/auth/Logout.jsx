@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
-import { getLocalStorageToken } from "../util/local_storage";
-import dataStore from "../store";
-import { authActions } from "../store/auth";
+import { getLocalStorageToken } from "../../util/local_storage";
+import dataStore from "../../store";
+import { authActions } from "../../store/auth";
 
 export function logoutAction(){
     dataStore.dispatch(authActions.onLogout());

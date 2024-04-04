@@ -1,7 +1,9 @@
 import { Form } from "react-router-dom";
-import Input from "./Input";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
+import Input from "./UI/Input";
+import classes from './LoginForm.module.css';
+import userFormClasses from './UserForm.module.css';
 
 export default function LoginForm(){
     const dispatch = useDispatch();
@@ -11,11 +13,25 @@ export default function LoginForm(){
     }
 
     return(
-        <Form method="post" onSubmit={handleSubmit}>
-          <h3>Login</h3>
-            <Input type="email" name="email" label="Email:"/>
-            <Input type="password" name="password" label="Password:"/>
-            <button type="submit">Save And Continue</button>
+        <Form method="post" onSubmit={handleSubmit} className={classes.form}>
+          <h3>Type Credentials Carefully.</h3>
+            <Input 
+                type="email" 
+                name="email" 
+                label="Email:"
+                required
+            />
+            <Input 
+                type="password" 
+                name="password" 
+                label="Password:"
+                required
+                minLength={8}
+            />
+            <div className={userFormClasses.actions}>
+                <button type="reset">Cancel</button>
+                <button type="submit">Login</button>
+            </div>
         </Form>
     )
 }

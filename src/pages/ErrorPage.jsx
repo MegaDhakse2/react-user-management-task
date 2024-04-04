@@ -1,7 +1,6 @@
-import ErrorElement from "../components/ErrorElement";
-import PageLayout from "../components/PageLayout";
-
 import { useRouteError } from 'react-router-dom';
+import ErrorElement from '../components/UI/ErrorElement';
+
 export default function ErrorPage() {
   const error = useRouteError();
 

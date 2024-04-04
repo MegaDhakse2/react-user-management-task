@@ -1,13 +1,12 @@
 import { redirect, useRouteLoaderData } from "react-router-dom";
-import { UserItem } from "../components/UserItem";
-import ErrorElement from "../components/ErrorElement";
+import { UserItem } from "../../components/UserItem";
+import ErrorElement from "../../components/UI/ErrorElement";
 
 export default function UserDetailPage(){
     const userData = useRouteLoaderData('user_details');
     console.log(userData, 'userData in userDetail page')
     return(
         <>
-            <h1>This is UserDetailPage !</h1>
             {(userData ?
                 <UserItem user={userData}/> 
                 :
