@@ -1,8 +1,44 @@
-# React + Vite
+# User Management Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a react project built in React library, using some basic and indepth concepts of React.
+<br>
+<br>
 
-Currently, two official plugins are available:
+## This App is Deployed in the below link
+#### https://explore-more-learn-more.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## For Dev Purpose
+### Installation
+* Clone the repo <code>git clone https://github.com/MegaDhakse2/react-user-management-task.git</code>
+* Install dependencies <code>npm install</code>
+* To Run Dev server <code>npm run dev</code>
+
+
+## Majorly used Concepts
+* Functional Components
+* React Essentials
+* Router dom
+* Redux (toolkit)
+* Data Fetching (API's)
+* Firebase json services
+* Local Storage
+* Handling Forms
+* Validations
+* Authentication
+* Deployment using Firebase Hosting
+* Stylings using Vennila CSS
+* Error Handling
+
+
+## Also Intended To Use further
+* React Query
+* Animations
+* Context API
+* Custom Hooks
+* Portals
+* Testing
+
+<br>
+<br>
+
+*Thanks Max & e2✌* 😎
