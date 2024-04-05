@@ -10,6 +10,7 @@ export default function LoginForm(){
 
     function handleSubmit(){
         dispatch(authActions.onLogin());
+        
     }
 
     return(

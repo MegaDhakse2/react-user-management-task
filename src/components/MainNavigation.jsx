@@ -2,7 +2,7 @@ import { Link, Form, NavLink } from "react-router-dom"
 import { getLocalStorageToken } from "../util/local_storage"
 import { useSelector } from "react-redux";
 import classes from './MainNavigation.module.css';
-import logo from '../assets/images/study_logo.jpg';
+import app_logo from '../assets/images/app_logo.jpg';
 
 export default function MainNavigation(){
     const userToken = getLocalStorageToken();
@@ -12,14 +12,16 @@ export default function MainNavigation(){
 
     return(
         <header className={classes.header}>
-            <div className={classes.title}>
+            <Link to='/user' style={{textDecoration:'none'}}>
+            <div className={classes.title} >
                 <img 
-                    src={logo} 
+                    src={app_logo} 
                     alt="Study Logo"
                     className={classes.logo}
                 />
                 <h1>Learn More Community</h1>
             </div>
+            </Link>
         <nav className={classes.nav}>  
             <ul className={classes.list}>
                 {
@@ -40,7 +42,7 @@ export default function MainNavigation(){
                         <>
                             <li>
                                 <NavLink to='/user/profile'>
-                                    My Profile
+                                    Profile
                                 </NavLink>
                             </li>
                             <li>

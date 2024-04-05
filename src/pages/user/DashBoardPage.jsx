@@ -11,7 +11,10 @@ export default function DashBoardPage(){
     // console.log(directFetchUsers, 'object from firebase in dashboard')
 
     return(
-        <h2>Dashboard</h2>
+        <h2 style={{textAlign: 'center'}}>Dashboard</h2>
+        
+        //Need to Set Events or Any Articles//
+
         // <> 
         // <h1>Welcome {currentUser.full_name}</h1>
         //     <h4>CurrentUser: {currentUser.email}</h4>

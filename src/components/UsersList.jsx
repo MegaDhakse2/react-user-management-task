@@ -7,15 +7,6 @@ export default function UsersList({users}){
         <div className={classes.users}>
              <h2>All Users!</h2>
              <ul className={classes.list}>
-                {/* {users.map((user)=>( */}
-                {/* {Object.entries(users).map(([key, user]) => (
-                    <div key={Math.random().toFixed(2)}>
-                        <li>{user.email}</li>
-                        <li>{user.name}</li>
-                        <Link to={key}>View Details</Link>
-                    </div>
-                ))} */}
-
                 {Object.entries(users).map(([key, user]) => (
                 <li key={key} className={classes.item}>
                     {/* <Link to={`/events/${event.id}`} > */}

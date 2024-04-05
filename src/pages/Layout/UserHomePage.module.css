@@ -11,6 +11,8 @@
 
 .img_links img{
     border-radius: 4%;
+    width: 18rem;
+    height: 13rem;
 }
 
 .img_links p{

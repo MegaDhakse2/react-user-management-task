@@ -1,7 +1,10 @@
 import classes from './UserHomePage.module.css';
-import allUsersImg from '../../assets/images/all_users_image.jpg';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import dashboardLogo from '../../assets/images/dashboard.jpg';
+import myProfileLogo from '../../assets/images/my_profile_logo.jpeg';
+import adminLogo from '../../assets/images/admin.jpg';
+import allUserLogo from '../../assets/images/all_users_image.jpg';
 
 export default function UserHomePage(){
     const currentUser = useSelector(state=> state.user.currentUser)
@@ -10,21 +13,21 @@ export default function UserHomePage(){
             <div className={classes.img_links}>
                 <div>
                     <NavLink to='profile'>
-                        <img src={allUsersImg} alt="My Profile Logo"></img>
-                        <p>Profile</p>
+                        <img src={myProfileLogo} alt="My Profile Logo"></img>
+                        <p>My Profile</p>
 
                     </NavLink>
                 </div>
                 <div>
                     <NavLink to='dashboard'>
-                        <img src={allUsersImg} alt="Dashboard Logo"></img>
+                        <img src={dashboardLogo} alt="Dashboard Logo"></img>
                         <p>Dashboard</p>
                     </NavLink>
                 </div>
                 {(currentUser.role === 'superAdmin') &&
                 <div>
                     <NavLink to='admin'>
-                        <img src={allUsersImg} alt="Admin Logo"></img>
+                        <img src={adminLogo} alt="Admin Logo"></img>
                         <p>Admin Space</p>
                     </NavLink>
                 </div>}

@@ -13,20 +13,7 @@ export default function UserForm({inputData, method}){
     const passwordsEquality = useSelector(state => state.user.signupValidations.passwordsEquality);
     const duplicateEmail = useSelector(state => state.user.signupValidations.emailDuplicate);
 
-    function handleSubmit(event){
-        event.preventDefault();
-        console.log('handleSubmit is calling');
-        const fd = new FormData(event.target);
-        const signedUpDetails = Object.fromEntries(fd.entries());
-
-        if (signedUpDetails.password !== signedUpDetails.confirm_password) {
-            setPasswordsAreNotEqual(true);
-            return
-          }
-          setPasswordsAreNotEqual(false);
-          console.log(signedUpDetails, 'from handlesubmit');
-    }
-
+   
     return(
         <Form method={method} className={classes.form} >
           <h3>Create User</h3>
@@ -99,14 +86,16 @@ export async function action({request, params}){
     }
 
     const rawUsers = await fetchData({filePath: 'users.json'});
-    const users = Object.values(rawUsers)
+    if(rawUsers){
+        const users = Object.values(rawUsers)
 
-    users.map(user=>{
-        if (userData.email === user.email) {
-            dataStore.dispatch(userActions.setEmailIsDuplicate())
-            return null
-        }
-    })
+        users.map(user=>{
+            if (userData.email === user.email) {
+                dataStore.dispatch(userActions.setEmailIsDuplicate())
+                return null
+            }
+        })
+    }
 
     if (userData.password !== userData.confirm_password) {
         dataStore.dispatch(userActions.setPasswordsAreNotEqual())
