@@ -14,7 +14,9 @@ export function  UserItem({user}){
 
     return(
         <div className={classes.user_item}>
-            <Profile user={user}/>
+            <div className={classes.profile_block}>
+              <Profile user={user}/>
+            </div>
             <div className={classes.actions}>
               <button className={classes.edit_but}><Link to="edit">Edit</Link></button>
               <button className={classes.delete_but} onClick={startDeleteHandler}>Delete User</button>

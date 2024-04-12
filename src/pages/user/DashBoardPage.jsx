@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { fetchData } from "../../util/http_requests"
 import { useSelector } from "react-redux";
+import ImageNavLink from "../../components/UI/ImageNavLink";
 
 export default function DashBoardPage(){
     // const currentUser = useSelector(state=> state.user.currentUser);
@@ -11,8 +12,13 @@ export default function DashBoardPage(){
     // console.log(directFetchUsers, 'object from firebase in dashboard')
 
     return(
+        <>
         <h2 style={{textAlign: 'center'}}>Dashboard</h2>
-        
+        <ImageNavLink 
+            to='/articles'
+            imageLabel='Articles'
+        />
+        </>
         //Need to Set Events or Any Articles//
 
         // <> 
@@ -30,7 +36,7 @@ export default function DashBoardPage(){
 
 export async function loader(){
 
-    const rawUsers = await fetchData({filePath: 'users.json'});
+    const rawUsers = await fetchData({url:'https://reactudemydb-default-rtdb.firebaseio.com/users.json'});
     // const users = Object.values(rawUsers)
 
     // const users = entries.map(([key, value]) => value);

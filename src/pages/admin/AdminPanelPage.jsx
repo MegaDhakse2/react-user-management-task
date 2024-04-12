@@ -1,28 +1,30 @@
-import { Link, NavLink, Outlet, redirect } from "react-router-dom";
+import { Outlet, redirect } from "react-router-dom";
 import dataStore from "../../store";
 import classes from './AdminPanelPage.module.css';
 import allUsersImg from '../../assets/images/all_users_image.jpg';
+import ImageNavLink from "../../components/UI/ImageNavLink";
+import SideNavBar from "../../components/UI/SideNavBar";
 
 export default function AdminPanelPage(){
     
     return(
         <div className={classes.admin_panel}>  
-            <div className={classes.admin_nav}>
-                <div>
-                    <NavLink to='users'>
-                        <img src={allUsersImg} alt="all users logo"></img>
-                        <p>Manage Users</p>
-                    </NavLink>
-                </div>
-                <div>
-                    <NavLink to='/user/admin/newuser'>
-                        <img src={allUsersImg} alt="create user logo"></img>
-                        <p>Create New User</p>
-                    </NavLink>
-                </div>
-            </div>
+            <SideNavBar>
+                <ImageNavLink 
+                    to='users' 
+                    src={allUsersImg} 
+                    alt="all users logo"
+                    imageLabel={'Manage Users'}
+                />
+                <ImageNavLink 
+                    to='/user/admin/newuser' 
+                    src={allUsersImg} 
+                    alt="create user logo"
+                    imageLabel={'Create New User'}
+                />
+            </SideNavBar>
             <div>
-            <Outlet/>
+                <Outlet/>
             </div>
         </div>
     )

@@ -16,8 +16,8 @@ export default function ManageUsersPage(){
 
 export async function loader(){
 
-  const rawUsers = await fetchData({filePath: 'users.json'});
-    const users = Object.values(rawUsers)
+  const rawUsers = await fetchData({url:'https://reactudemydb-default-rtdb.firebaseio.com/users.json'});
+    // const users = Object.values(rawUsers)
 
     // const users = entries.map(([key, value]) => value);
     // console.log('users data in dashboard', users)

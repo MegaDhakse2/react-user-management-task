@@ -14,6 +14,6 @@ export default function ProfilePage(){
 
     console.log(currentUser, 'current user in users profile')
     return (
-        <Profile user={currentUser} currentUser={true}/>
+        <Profile user={currentUser} isCurrentUser={true}/>
     )
 }

@@ -12,19 +12,20 @@
 
 .for_user_details{
     padding: 4%;
-    width: 58%;
+    /* width: 58%;
     margin: 2% 20%;
+    height: fit-content; */
     background-color: #660909;
     color: aquamarine;
     border-radius: 6%;
 }
 .profile_block .image {
-    width: inherit;
+    width: 70%;
     border-radius: 50%;
 }
 
 .for_user_details .image{
-    width: inherit;
+    width: 70%;
     border-radius: 50%;
 }
 

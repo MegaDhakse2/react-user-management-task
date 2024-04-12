@@ -9,8 +9,7 @@ export default function LoginForm(){
     const dispatch = useDispatch();
 
     function handleSubmit(){
-        dispatch(authActions.onLogin());
-        
+        dispatch(authActions.onLogin());    
     }
 
     return(

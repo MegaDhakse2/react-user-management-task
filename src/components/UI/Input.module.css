@@ -1,10 +1,12 @@
  .label, 
- .input{
+ .input, 
+ .textarea{
   display: block;
   width: 80%;
 }
 
-.input {
+.input,
+.textarea {
     font: inherit;
     padding: 0.25rem;
     margin-bottom: 2%;

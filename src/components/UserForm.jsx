@@ -19,9 +19,16 @@ export default function UserForm({inputData, method}){
           <h3>Create User</h3>
             <Input 
                 type="text" 
-                name="full_name" 
-                label="Full Name:" 
-                defaultValue={inputData && inputData.full_name}
+                name="first_name" 
+                label="First Name:" 
+                defaultValue={inputData && inputData.first_name}
+                required
+            />
+            <Input 
+                type="text" 
+                name="last_name" 
+                label="Last Name:" 
+                defaultValue={inputData && inputData.last_name}
                 required
             />
             <Input 
@@ -31,7 +38,7 @@ export default function UserForm({inputData, method}){
                 defaultValue={inputData && inputData.email}
                 required
             />
-            {duplicateEmail && <small><p>Email Exists Already..</p></small>}
+            {!method === 'patch' && duplicateEmail && <small><p>Email Exists Already..</p></small>}
 
             <Input 
                 type="password" 
@@ -77,7 +84,8 @@ export async function action({request, params}){
     const data = await request.formData();
 
     const userData = {
-        full_name: data.get('full_name'),
+        first_name: data.get('first_name'),
+        last_name: data.get('last_name'),
         email : data.get('email'),
         password : data.get('password'),
         confirm_password : data.get('confirm_password'),
@@ -85,7 +93,7 @@ export async function action({request, params}){
         role: 'user'
     }
 
-    const rawUsers = await fetchData({filePath: 'users.json'});
+    const rawUsers = await fetchData({url:'https://reactudemydb-default-rtdb.firebaseio.com/users.json'});
     if(rawUsers){
         const users = Object.values(rawUsers)
 

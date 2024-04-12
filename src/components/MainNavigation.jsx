@@ -46,8 +46,8 @@ export default function MainNavigation(){
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/user/dashboard'>
-                                    Dashboard
+                                <NavLink to='/user/articles'>
+                                    Articles
                                 </NavLink>
                             </li>
                             {(currentUser.role === 'superAdmin') &&

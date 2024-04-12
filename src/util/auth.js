@@ -3,7 +3,7 @@ import { fetchData } from "./http_requests";
 import { getLocalStorageToken } from "./local_storage";
 
 export async function authenticateUser({auth_user}){
-    const rawUsers = await fetchData({filePath: 'users.json'});
+    const rawUsers = await fetchData({url:'https://reactudemydb-default-rtdb.firebaseio.com/users.json'});
     const allUsers = Object.values(rawUsers);
     const user = allUsers.find(user => user.email === auth_user.email);
     let passwordMatch = true;

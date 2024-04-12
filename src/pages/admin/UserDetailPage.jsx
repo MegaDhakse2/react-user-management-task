@@ -52,7 +52,6 @@ export async function action({params, request}){
     const response = await fetch(`https://reactudemydb-default-rtdb.firebaseio.com/users/${id}.json` , {
         method: request.method,
     })
-
     if (!response.ok) {
         throw json(
             {

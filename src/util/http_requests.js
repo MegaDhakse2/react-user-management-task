@@ -1,4 +1,5 @@
 import { json, redirect } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export async function uploadData({data, url, method}){
     
@@ -13,7 +14,7 @@ export async function uploadData({data, url, method}){
 
     if (!response.ok) {
         throw json({
-            message: 'An Error Occurred, Not able to create user!'
+            message: 'An Error Occurred, Not able to upload Data!'
         },
         {
             status: 500
@@ -24,21 +25,71 @@ export async function uploadData({data, url, method}){
     return resData;
 }
 
-export async function fetchData({filePath}){
-    const response = await fetch('https://reactudemydb-default-rtdb.firebaseio.com/'+ filePath);
+export async function fetchData({url}){
+    const response = await fetch(url);
 
     if (!response.ok) {
-        json(
+        throw json(
             {
-                message: 'Not able to fetch users, Try Again'
+                message: 'Not able to fetch data, Try Again'
             },
             {
                 status: 500
             }
         )
+    }else if(response === null){
+        throw json(
+            {
+            message: 'No data found!'
+            },
+            {
+                status:404
+            }
+        )
     }
 
     const resData = await response.json();
-    console.log('users data from firebase', resData)
+    console.log('Data from firebase', resData)
     return resData;
 }
+
+export async function uploadFile({file, storage, location}){
+    debugger
+    //Upload file to firebase Storage
+        //Reference to the desired location in Firebase Storage
+        const storageRef = ref(storage, location)
+        try {
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            await uploadTask;
+            
+            //Getting firebase storage image url
+            const downloadURL = await getDownloadURL(storageRef);
+            return downloadURL;
+        } catch (error) {
+            throw json(
+                {
+                    message: error.message || 'Error in uploading file!!'
+                },
+                {
+                    status: error.status || 500
+                }
+            )
+         }
+}
+
+export async function deleteData({url}){
+    const response = await fetch(url , {
+        method: 'DELETE',
+    })
+
+    if (!response.ok) {
+        throw json(
+            {
+            message: 'Could not delete!'
+        },
+        {
+            status:500
+        }
+        )
+    }
+}       

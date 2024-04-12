@@ -1,4 +1,8 @@
-
+.profile_block{
+  width: 58%;
+  height: fit-content;
+  margin: 2% 20%;
+}
 .user_item a{
   text-decoration: none;
 }

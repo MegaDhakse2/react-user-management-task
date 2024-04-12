@@ -1,6 +1,6 @@
 import classes from './Input.module.css';
 
-export default function Input({type, name, label, defaultValue, ...props}){
+export default function Input({type, name, label, ...props}){
     return(
         <div>
             <label 
@@ -10,13 +10,22 @@ export default function Input({type, name, label, defaultValue, ...props}){
                 {label}
             </label>
 
-            <input 
+            {(type === 'textarea') ?
+                <textarea  
+                    name={name}
+                    className={classes.textarea}
+                    {...props}
+                />
+                :
+                <input 
                 type={type} 
                 name={name} 
-                defaultValue={defaultValue ? defaultValue : ''}
                 className={classes.input}
                 {...props}
-            />
+                />
+            }
+           
+
         </div>
     )
 }

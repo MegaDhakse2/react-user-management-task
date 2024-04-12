@@ -11,11 +11,11 @@ export default function UsersList({users}){
                 <li key={key} className={classes.item}>
                     {/* <Link to={`/events/${event.id}`} > */}
                     <Link to={key} >
-                    <img src={profileLogo} alt='profile image' />
-                    <div className={classes.content}>
-                        <h2>{user.full_name}</h2>
-                        <p>{user.email}</p>
-                    </div>
+                        <img src={profileLogo} alt='profile image' />
+                        <div className={classes.content}>
+                            <h2>{`${user.first_name} ${user.last_name}`}</h2>
+                            <p>{user.email}</p>
+                        </div>
                     </Link>
                 </li>
                 ))}

@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout, {loader as rootLoader} from "./pages/Layout/RootLayout";
 import SignupPage, { loader as signupLoader } from './pages/auth/SignupPage';
 import LoginPage, { action as authenticateUserAction, loader as loginLoader } from './pages/auth/LoginPage';
-import DashBoardPage, { loader as fetchUsers } from './pages/user/DashBoardPage';
 import ErrorPage from './pages/ErrorPage';
 import { logoutAction, loader as logoutLoader } from './pages/auth/Logout';
 import ProfilePage from './pages/user/ProfilePage';
@@ -16,6 +15,11 @@ import EditUserPage from './pages/admin/EditUserPage';
 import WelcomePage from './pages/Layout/WelcomePage';
 import UserHomePage from './pages/Layout/UserHomePage';
 import AdminHomePage from './pages/admin/AdminHomePage';
+import AllArticlesPage, {loader as allArticlesLoader} from './pages/articles/AllArticlesPage';
+import NewArticlePage from './pages/articles/NewArticlePage';
+import MyArticlesPage, {loader as myArticlesLoader} from './pages/articles/MyArticlesPage';
+import ArticlePreview from './components/articles/ArticlePreview';
+import EditArticlePage, {loader as editArticleLoader} from './pages/articles/EditArticlePage';
 
 export const router= createBrowserRouter(
   [
@@ -53,10 +57,39 @@ export const router= createBrowserRouter(
           element:<UserHomePage/>
         },
         { 
-          path: 'dashboard',
-          element: <DashBoardPage/>,
+          path: 'articles',
+          element: <AllArticlesPage/>,
+          // errorElement: <ErrorPage/>,
+          id:'all_articles',
+          loader: allArticlesLoader
+        },
+        { 
+          path: 'myarticles',
+          element: <MyArticlesPage  />,
+          id:'my_articles',
+          loader: myArticlesLoader
+        },
+        { 
+          path: 'newarticle',
+          element: <NewArticlePage/>,
           // id:'user_dashboard',
-          // loader: fetchUsers
+          // loader: fetchUsers.
+        },
+        { 
+          path: 'newarticle/preview',
+          element: <ArticlePreview />,
+          // id:'user_dashboard',
+          // loader: fetchUsers.
+        },
+        {
+          path: 'articles/:articleId/edit',
+          element: <EditArticlePage/>,
+          loader: editArticleLoader
+        },
+        {
+          path: 'myarticles/:articleId/edit',
+          element: <EditArticlePage/>,
+          loader: editArticleLoader
         },
         { path: 'profile',
           element: <ProfilePage/>,
@@ -65,6 +98,7 @@ export const router= createBrowserRouter(
           path: 'admin',
           element: <AdminPanelPage/>,
           loader: adminPanelLoader,
+          errorElement: <ErrorPage/>,
           children:[
             {
               index:true,
