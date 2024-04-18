@@ -5,6 +5,10 @@ const usersInitialState = {
     signupValidations : {
         passwordsEquality : true,
         emailDuplicate : false
+    },
+    loginValidations : {
+        isUserFound : true,
+        isPwdCorrect: true
     }
 }
 
@@ -18,14 +22,27 @@ const userSlice = createSlice({
         setPasswordsAreNotEqual(state){
             state.signupValidations.passwordsEquality = false
         },
+        setEmailIsNotDuplicate(state){
+            state.signupValidations.emailDuplicate = false
+        },
         setPasswordsAreEqual(state){
             state.signupValidations.passwordsEquality = true
         },
         setEmailIsDuplicate(state){
             state.signupValidations.emailDuplicate = true
         },
-        setEmailIsNotDuplicate(state){
-            state.signupValidations.emailDuplicate = false
+        
+        setNoUserFound(state){
+            state.loginValidations.isUserFound = false
+        },
+        setWrongPassword(state){
+            state.loginValidations.isPwdCorrect = false
+        },
+        setUserFound(state){
+            state.loginValidations.isUserFound = true
+        },
+        setPasswordCorrect(state){
+            state.loginValidations.isPwdCorrect = true
         }
     }
 })

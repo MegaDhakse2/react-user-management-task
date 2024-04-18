@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux'
 import { uploadData, uploadFile } from "../../util/http_requests";
 import { useNavigate } from "react-router-dom";
 import { ReactUdemyDBstorage } from "../../firebase/firebaseConfig";
+import { deleteFileByDownloadURL } from "../../firebase/firebaseUtil";
 
 export default function NewArticlePage({editArticle}){
     //Redux
@@ -18,9 +19,9 @@ export default function NewArticlePage({editArticle}){
     const articlePreviewRef = useRef();
     const [currentArticle, setCurrentArticle] = useState({});
     const [artStateImg, setArtStateImg] = useState(null);
+    const [isImageURLEmpty, setIsImageURLEmpty] = useState(false);
     const imgFileSizeLimitBytes = 5 * 1024 * 1024; //5MB
     
-    const [progresspercent, setProgresspercent] = useState(0);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -39,27 +40,24 @@ export default function NewArticlePage({editArticle}){
 
     function handleSubmit(event){
         event.preventDefault();
-
         //Get Data from form
         const fd = new FormData(event.target);
         const articleData = Object.fromEntries(fd.entries());
         articleData.author = currentUser.first_name;
         console.log(articleData, 'article info in handlesubmit before uploading ');
-
+        alert('article Created successfully')
         //Opening Preview
         articlePreviewRef.current.open();
+
+        //set user Article Data
         setCurrentArticle(articleData);
 
         // navigate('preview') //Need to specify route for it
     }
 
-    function handleReset(){
-        setArtStateImg(null);
-    }
-
     async function uploadArticleData(articleData){
-        const file = articleData.imageFile;
-        debugger
+        const file = articleData.imageFile.size;
+         
         //Upload Image to firebase Storage
         if (file) {
             const fileDownloadURL = await uploadFile({
@@ -82,10 +80,15 @@ export default function NewArticlePage({editArticle}){
     }
 
     async function editnUpdateArticleData(articleData){
-        const file = articleData.imageFile;
-        debugger
+        const existingImgURL = editArticle.article.imageURL;
+        const newFile = articleData.imageFile.size;
+        // debugger
         //Upload Image to firebase Storage
-        if (file) {
+        if (newFile) {
+            if (existingImgURL) {
+                await deleteFileByDownloadURL({storage: ReactUdemyDBstorage, downloadURL: existingImgURL});
+            }
+
             const fileDownloadURL = await uploadFile({
                 file: articleData.imageFile,
                 storage: ReactUdemyDBstorage,
@@ -93,9 +96,12 @@ export default function NewArticlePage({editArticle}){
             })
 
             articleData.imageURL = fileDownloadURL;
+        }else if(isImageURLEmpty){
+            articleData.imageURL = ''
         }
-
-        articleData.imageURL = editArticle.article.imageURL;
+        else{
+            articleData.imageURL = existingImgURL;
+        }
 
         //Upload data to firebase RealTime DB
         await uploadData({
@@ -115,21 +121,22 @@ export default function NewArticlePage({editArticle}){
                 onPublish={editArticle ? editnUpdateArticleData : uploadArticleData}
                 article={currentArticle}
                 artStateImg={artStateImg}
-                existingArticle={editArticle.article} //For existing articleImg view purpose
+                existingArticle={editArticle && editArticle.article} //For existing articleImg view purpose
+                isImageURLEmpty={isImageURLEmpty} //For No image Preview on editing
             />
 
             {/* Form */}
             <div>
-                <header style={{textAlign:'center', marginBottom: "-3%"}}>
+                <div style={{textAlign:'center', marginBottom: "-3%"}}>
                     <img src={addArtHeaderImg} width={150} height={150} />
-                </header>
+                </div>
                 <ArticleForm 
                     handleSubmit={handleSubmit} 
-                    handleReset={handleReset}
                     artStateImg={artStateImg} 
                     handleImageChange={handleImageChange}
                     setArtStateImg={setArtStateImg}
                     existingArticle={editArticle && editArticle.article}
+                    setIsImageURLEmpty={setIsImageURLEmpty}
                 />
             </div>
         </>

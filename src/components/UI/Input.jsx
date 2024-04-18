@@ -2,7 +2,7 @@ import classes from './Input.module.css';
 
 export default function Input({type, name, label, ...props}){
     return(
-        <div>
+        <div className={classes.input_block}>
             <label 
                 htmlFor={name}
                 className={classes.label}

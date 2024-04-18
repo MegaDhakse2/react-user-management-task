@@ -5,7 +5,7 @@ import profileLogo from '../assets/images/profile_male_logo.png';
 export default function UsersList({users}){
     return(
         <div className={classes.users}>
-             <h2>All Users!</h2>
+             <h2>All Users</h2>
              <ul className={classes.list}>
                 {Object.entries(users).map(([key, user]) => (
                 <li key={key} className={classes.item}>

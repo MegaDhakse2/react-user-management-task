@@ -6,3 +6,7 @@
     /* text-align: right; */
     margin: 1% 5%; 
 }
+
+.login_block{
+    display: flex;
+}

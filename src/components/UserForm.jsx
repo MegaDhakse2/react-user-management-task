@@ -4,18 +4,33 @@ import { fetchData, uploadData } from "../util/http_requests";
 import dataStore from "../store";
 import Input from "./UI/Input";
 import classes from './UserForm.module.css';
-import { useState } from "react";
+import { useEffect } from "react";
 import { userActions } from "../store/user";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function UserForm({inputData, method}){
-    const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
+    const dispatch = useDispatch();
     const passwordsEquality = useSelector(state => state.user.signupValidations.passwordsEquality);
-    const duplicateEmail = useSelector(state => state.user.signupValidations.emailDuplicate);
+    const isDuplicateEmail = useSelector(state => state.user.signupValidations.emailDuplicate);
 
-   
+    useEffect(() => {
+        // Cleanup function to execute when the component unmounts
+        return () => {
+          // Perform cleanup tasks here, such as canceling subscriptions or clearing intervals
+          console.log('UserForm Component unmounted. Performing cleanup.');
+          handleReset()
+        };
+      }, []); 
+
+    function handleReset(){
+        //Resetting For validation purpose
+        dispatch(userActions.setPasswordsAreEqual())
+        dispatch(userActions.setEmailIsNotDuplicate())
+    }
+
     return(
-        <Form method={method} className={classes.form} >
+        <Form method={method} className={classes.form} onReset={handleReset}>
           <h3>Create User</h3>
             <Input 
                 type="text" 
@@ -38,7 +53,7 @@ export default function UserForm({inputData, method}){
                 defaultValue={inputData && inputData.email}
                 required
             />
-            {!method === 'patch' && duplicateEmail && <small><p>Email Exists Already..</p></small>}
+            {method !== 'patch' && isDuplicateEmail && <small>Email Exists Already..</small>}
 
             <Input 
                 type="password" 
@@ -57,10 +72,10 @@ export default function UserForm({inputData, method}){
                 required
                 minLength={8}
             />
-            {!passwordsEquality && <small><p>Passwords must be equal..</p></small>}
+            {!passwordsEquality && <small>Password & Confirm Passoword must be equal..</small>}
 
             <div className={classes.actions}>
-                <button type="reset">Cancel</button>
+                <button type="reset">Reset</button>
                 <button type="submit">
                         {(method === 'post') ? 
                             'Save And Continue'
@@ -76,7 +91,7 @@ export async function action({request, params}){
     const state = dataStore.getState();
     const isLoggedIn = state.auth.isAuthenticated;
 
-    //for validation purpose
+    //Resetting For validation purpose
     dataStore.dispatch(userActions.setPasswordsAreEqual())
     dataStore.dispatch(userActions.setEmailIsNotDuplicate())
 
@@ -105,6 +120,7 @@ export async function action({request, params}){
         })
     }
 
+    // debugger
     if (userData.password !== userData.confirm_password) {
         dataStore.dispatch(userActions.setPasswordsAreNotEqual())
         return null

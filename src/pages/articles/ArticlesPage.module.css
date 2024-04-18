@@ -1,7 +1,7 @@
 .articles_panel{
     display: flex;
     /* justify-content: start; */
-    margin-top: 2%;
+    /* margin-top: 2%; */
     margin-left: 5%;
 }
 
@@ -9,6 +9,7 @@
     display: flex;
     position: fixed;
     right: 7%;
+    top: 20%;
 }
 
 .side_nav .image_style{

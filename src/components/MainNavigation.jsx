@@ -2,26 +2,50 @@ import { Link, Form, NavLink } from "react-router-dom"
 import { getLocalStorageToken } from "../util/local_storage"
 import { useSelector } from "react-redux";
 import classes from './MainNavigation.module.css';
-import app_logo from '../assets/images/app_logo.jpg';
+import app_logo from '../assets/images/elections/elections_logo1.png';
+import { useState, useEffect } from "react";
 
 export default function MainNavigation(){
     const userToken = getLocalStorageToken();
     const currentUser = useSelector(state => state.user.currentUser);
-    console.log(userToken)
-    console.log(currentUser.role, 'currentUser role')
+    // console.log(userToken)
+    // console.log(currentUser.role, 'currentUser role')
+
+    //Styling Purpose
+    const [isSticky, setIsSticky] = useState(false);
+    const [isScrolledDown, setIsScrolledDown] = useState(false);
+    const [prevScrollY, setPrevScrollY] = useState(0);
+
+    //Styling Purpose
+    useEffect(() => {
+        // console.log('mainNavigation bar rerendering')
+        const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        setIsScrolledDown(currentScrollY > prevScrollY);
+        setPrevScrollY(currentScrollY);
+        setIsSticky(currentScrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+        window.removeEventListener('scroll', handleScroll);
+        };
+    }, [prevScrollY]);
+
 
     return(
-        <header className={classes.header}>
-            <Link to='/user' style={{textDecoration:'none'}}>
+        <header className={`${classes.header} ${isSticky ? classes.sticky : ''} ${isScrolledDown ? classes.smaller : ''}`}>
+            <NavLink to='/user' style={{textDecoration:'none'}} >
             <div className={classes.title} >
                 <img 
                     src={app_logo} 
                     alt="Study Logo"
                     className={classes.logo}
                 />
-                <h1>Learn More Community</h1>
-            </div>
-            </Link>
+                <h2>General Elections of India</h2>
+            </div> 
+            </NavLink>
         <nav className={classes.nav}>  
             <ul className={classes.list}>
                 {

@@ -1,4 +1,8 @@
- .label, 
+.input_block{
+  margin-top: 2%;
+}
+
+.label, 
  .input, 
  .textarea{
   display: block;
@@ -9,7 +13,7 @@
 .textarea {
     font: inherit;
     padding: 0.25rem;
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
     border: solid 1px #4cb8d9;
     border-radius: 6px;
 } 

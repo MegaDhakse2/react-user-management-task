@@ -6,6 +6,7 @@ import ImageNavLink from "../../components/UI/ImageNavLink";
 import classes from './ArticlesPage.module.css';
 import { fetchData } from "../../util/http_requests";
 import {useLoaderData, useRouteLoaderData} from 'react-router-dom';
+import { Suspense } from "react";
 
 export default function ArticlesPage(){
     
@@ -14,10 +15,12 @@ export default function ArticlesPage(){
     return(
         <div className={classes.articles_panel}>
          
-            <ArticlesShow 
-                articles={allArticles}
-                heading={'All Articles'}
-            />
+            <Suspense fallback={<div> Loading...</div>}>
+                <ArticlesShow 
+                    articles={allArticles}
+                    heading={'All Articles'}
+                />
+            </Suspense>
             <SideNavBar className={classes.side_nav}>
                 <ImageNavLink 
                     to='/user/myarticles' 

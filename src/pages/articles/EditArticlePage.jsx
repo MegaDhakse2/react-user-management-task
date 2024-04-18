@@ -11,7 +11,7 @@ export default function EditArticlePage(){
         article: article,
         articleId : articleId
     }
-    debugger
+     
     console.log(editArticle, 'article to edit in EditArticlePage')
     return(
         <NewArticlePage editArticle={editArticle} />

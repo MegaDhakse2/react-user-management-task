@@ -6,6 +6,19 @@
     border-radius: 5%;
   }
   
+  .article_form{
+    /* max-width: 50%; */
+    margin: 1% 27%;
+    background-color: #39aedb;
+    padding: 2%;
+    border-radius: 5%;
+  }
+
+  .form small{
+    color:#9b1515;
+    margin-top:0;
+  }
+  
   .actions {
     /* display: flex;
     gap: 1rem;

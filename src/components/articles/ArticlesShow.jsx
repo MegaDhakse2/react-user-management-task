@@ -25,7 +25,7 @@ export default function ArticlesShow({articles, heading}){
             <h1>{heading}</h1>
             {articles && 
                 articles.map(([key, article]) => (
-                    <div style={{marginBottom:'2%'}}>
+                    <div style={{marginBottom:'2%'}} key={key}>
                         <ArticleView article={article} articleId={key}/>
                     </div>
                 ))

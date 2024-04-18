@@ -19,9 +19,9 @@ export default function UserHomePage(){
                     </NavLink>
                 </div>
                 <div>
-                    <NavLink to='dashboard'>
+                    <NavLink to='articles'>
                         <img src={dashboardLogo} alt="Dashboard Logo"></img>
-                        <p>Dashboard</p>
+                        <p>Articles</p>
                     </NavLink>
                 </div>
                 {(currentUser.role === 'superAdmin') &&

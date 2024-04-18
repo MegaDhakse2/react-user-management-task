@@ -3,7 +3,7 @@ import ArticleView from "./ArticleView";
 import classes from './ArticlePreview.module.css';
 import { createPortal } from "react-dom";
 
-const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, existingArticle, artStateImg}, ref){
+const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, existingArticle, artStateImg, isImageURLEmpty}, ref){
     const dialog = useRef();
 
     useImperativeHandle(ref, ()=>{
@@ -15,7 +15,7 @@ const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, e
     });
 
     async function publish(){
-        debugger
+         
         await onPublish(article);
         dialog.current.close();
     }
@@ -28,7 +28,8 @@ const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, e
                     article={article} 
                     artStateImg={artStateImg}
                     isArtPreview={true}
-                    existingArtImg={existingArticle.imageURL}
+                    existingArtImg={existingArticle && existingArticle.imageURL}
+                    isImageURLEmpty={isImageURLEmpty}
                 />
             </div>
             <div className={classes.action_butns}>

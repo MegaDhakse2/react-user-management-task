@@ -31,7 +31,7 @@ export async function fetchData({url}){
     if (!response.ok) {
         throw json(
             {
-                message: 'Not able to fetch data, Try Again'
+                message: 'Unable to fetch data, Try Again'
             },
             {
                 status: 500
@@ -54,7 +54,7 @@ export async function fetchData({url}){
 }
 
 export async function uploadFile({file, storage, location}){
-    debugger
+     
     //Upload file to firebase Storage
         //Reference to the desired location in Firebase Storage
         const storageRef = ref(storage, location)

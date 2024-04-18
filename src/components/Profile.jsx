@@ -10,6 +10,7 @@ export default function Profile({user, isCurrentUser}){
             <div className={classes.user_details}>
                 <p>Name: {`${user.first_name} ${user.last_name}`}</p>
                 <p>Email: {user.email}</p>
+                <p>Role: {user.role}</p>
                 {(user.mobile) && 
                 <p>Mobile: {user.mobile}</p>}
             </div>

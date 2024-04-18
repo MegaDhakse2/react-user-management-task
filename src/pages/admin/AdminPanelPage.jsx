@@ -4,6 +4,7 @@ import classes from './AdminPanelPage.module.css';
 import allUsersImg from '../../assets/images/all_users_image.jpg';
 import ImageNavLink from "../../components/UI/ImageNavLink";
 import SideNavBar from "../../components/UI/SideNavBar";
+import { Suspense } from "react";
 
 export default function AdminPanelPage(){
     
@@ -24,7 +25,9 @@ export default function AdminPanelPage(){
                 />
             </SideNavBar>
             <div>
-                <Outlet/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Outlet />
+                </Suspense>
             </div>
         </div>
     )

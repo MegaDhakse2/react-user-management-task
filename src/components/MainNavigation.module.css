@@ -1,35 +1,81 @@
-.header {
+/* .header {
   max-width: 100%;
-    padding: 1.5rem;
-    padding-right: 21%;
-    padding-bottom: 0.1%;
-    display: flex;
-    background-color: #75b5b7;
-    justify-content: space-between;
-    position: sticky;
-    top:0;  
-    border-radius: 0 0 3% 3%;
+  padding: 1.5rem;
+  padding-right: 12%;
+  padding-bottom: 0.1%;
+  display: flex;
+  background-color: #75b5b7;
+  justify-content: space-between;
+  position: sticky;
+  top:0;  
+  border-radius: 0 0 3% 3%;
+  transition: padding 0.3s ease-out;
+} */
+ .header{
+  background-color: #75b5b7;
+  padding-top: 0.3rem;
+  padding-right: 2%;
+  max-width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: padding 0.3s ease-in-out;
+  position: sticky;
+  top: 0;
 }
-  
+
+
+.header.sticky {
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header.smaller {
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  padding: 0;
+  height: 3rem;
+}
+
+.header.smaller h1{
+  font-size: xx-large;
+}
+
+/* .header.smaller a{
+  font-size: small;
+} */
+
+.header.smaller .logo{
+  width: 10%;
+  height: 4rem;
+  border-radius: 30%;
+}
+
 .logo{
-  width: 15%;
-  height: 5rem;
+  width: 10%;
+  height: 4.5rem;
   border-radius: 30%;
 }
 
 .title{
   display: flex;
-  /* justify-content: space-between; */
-  align-items: stretch;
-  font-family: monospace;
-  font-size: x-large;
+    /* justify-content: space-between; */
+    align-items: center;
+    font-family: monospace;
+    font-size: x-large;
+    color: black;
+    width: 49rem;
 }
-
 
   .list {
     display: flex;
     gap: 2rem;
     list-style: none;
+    align-items: end;
   }
   
   .list a {
