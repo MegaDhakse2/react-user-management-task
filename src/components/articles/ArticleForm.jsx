@@ -3,7 +3,7 @@ import Input from "../UI/Input";
 import classes from '../UserForm.module.css';
 import imageUploadIcon from '../../assets/images/image_upload_icon.png'
 import editUploadedIcon from '../../assets/images/edit_uploaded_icon.png'
-import imageRemoveIcon from '../../assets/images/remove_image_icon.png'
+import imageRemoveIcon from '../../assets/images/general_icons/icons8-close-64.png';
 import {useNavigate} from 'react-router-dom';
 
 export default function ArticleForm({
@@ -19,10 +19,13 @@ export default function ArticleForm({
     const imageFileRef = useRef();
     const [dupExistingArticle, setDupExistingArticle] = useState({...existingArticle});
 
-    function onRemoveImgFile(){
+    function onTempRemoveStateImgFile(){
         // debugger
         setArtStateImg(null);
         imageFileRef.current.value = '';
+    }
+
+    function onTempRemoveUploadedImgFile(){
         if (existingArticle && dupExistingArticle && dupExistingArticle.imageURL) {
             setDupExistingArticle((preVal)=>{
                 const newVal = {...preVal, 
@@ -75,6 +78,8 @@ export default function ArticleForm({
                 accept="image/*"
                 onChange={handleImageChange}
             />  */}
+            
+            {/* /////Image upload Label Start///// */}
             <label style={{display:'inline-block', marginTop:'inherit', marginTop: '2%'}} onClick={()=>setIsImageURLEmpty(true)}>
                 <input 
                     style={{display:'none'}}
@@ -94,41 +99,53 @@ export default function ArticleForm({
                     height='48px'
                 />
             </label>
-            {(artStateImg || (dupExistingArticle && dupExistingArticle.imageURL)) &&
-                <img 
-                    src={imageRemoveIcon} 
-                    style={{cursor:'pointer'}}
-                    width='30px'
-                    height='30px'
-                    onClick={onRemoveImgFile}
-                /> }
+            {/* /////Label Stop///// */}
 
+            {/* /////Image upload Img Preview Start///// */}
             <div>
-                 
                 {artStateImg && (
-                    <div>
+                    <div className={classes.img_preview_block}>
                         <p style={{margin:'0'}}>
                             <small>New Image Preview:</small>
                         </p>
                         <img 
                             src={artStateImg} 
                             alt="Uploaded" 
-                            style={{ maxWidth: '75%', maxHeight: '150px' }}
+                            className={classes.preview_img}
                         />
+                        {/* State Image Remove Button */}
+                        {(artStateImg || (dupExistingArticle && dupExistingArticle.imageURL)) &&
+                            <img 
+                                src={imageRemoveIcon} 
+                                alt="close button"
+                                className={classes.img_close_button}
+                                onClick={onTempRemoveStateImgFile}
+                            />
+                        }
                     </div>
                 )}
                 
                 {dupExistingArticle && dupExistingArticle.imageURL && (
-                    <div>
+                    <div className={classes.img_preview_block}>
                         <p style={{margin:'0'}}><small>Existing Image Preview:</small></p>
                         <img 
                             src={dupExistingArticle.imageURL} 
                             alt="Uploaded" 
-                            style={{ maxWidth: '75%', maxHeight: '150px' }} 
+                            className={classes.preview_img}
                         />
+                        {/* Uploaded Image Remove Button */}
+                        {(artStateImg || (dupExistingArticle && dupExistingArticle.imageURL)) &&
+                            <img 
+                                src={imageRemoveIcon} 
+                                alt="close button"
+                                className={classes.img_close_button}
+                                onClick={onTempRemoveUploadedImgFile}
+                            />
+                        }
                     </div>
                 )}
             </div>
+            {/* /////Img Preview Ends///// */}
 
             
             <Input 

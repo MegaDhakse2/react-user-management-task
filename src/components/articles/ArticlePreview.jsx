@@ -2,8 +2,11 @@ import { forwardRef, useRef, useImperativeHandle } from "react";
 import ArticleView from "./ArticleView";
 import classes from './ArticlePreview.module.css';
 import { createPortal } from "react-dom";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui";
 
 const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, existingArticle, artStateImg, isImageURLEmpty}, ref){
+    const dispatch = useDispatch();
     const dialog = useRef();
 
     useImperativeHandle(ref, ()=>{
@@ -15,9 +18,10 @@ const ArticlePreview = forwardRef(function ArticlePreview({onPublish, article, e
     });
 
     async function publish(){
-         
-        await onPublish(article);
         dialog.current.close();
+        dispatch(uiActions.startLoading());
+        await onPublish(article);
+        dispatch(uiActions.startLoading());
     }
 
     return createPortal(

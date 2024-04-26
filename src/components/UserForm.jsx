@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { userActions } from "../store/user";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { uiActions } from "../store/ui";
 
 export default function UserForm({inputData, method}){
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function UserForm({inputData, method}){
         // Cleanup function to execute when the component unmounts
         return () => {
           // Perform cleanup tasks here, such as canceling subscriptions or clearing intervals
-          console.log('UserForm Component unmounted. Performing cleanup.');
+        //   console.log('UserForm Component unmounted. Performing cleanup.');
           handleReset()
         };
       }, []); 
@@ -130,13 +131,25 @@ export async function action({request, params}){
         userData.role = 'superAdmin'
     }
     
-    console.log('userData on submit signup form', userData);
+    // console.log('userData on submit signup form', userData);
 
     if (method === 'PATCH') {
         const userId = params.userId;
         await uploadData({data: userData, url:`https://reactudemydb-default-rtdb.firebaseio.com/users/${userId}.json`, method: method});
+        
+        //For flash message Purpose
+        dataStore.dispatch(uiActions.writeFlash({type:'success', message:'User Edited Successfully!'}));
     }else{
         await uploadData({data: userData, url: 'https://reactudemydb-default-rtdb.firebaseio.com/users.json', method: method});
+        
+        //For flash message Purpose
+        dataStore.dispatch(
+            uiActions.writeFlash({
+                type:'success', 
+                message: isLoggedIn ? 'User Created Successfully!' : 'You Have Signed Up Successfully, You can Login now'
+            })
+        );
+
     }
 
     if (isLoggedIn) {

@@ -7,7 +7,7 @@ export default function ArticlesShow({articles, heading}){
         
     if (!articles || articles.length === 0) {
         return(
-            <div>
+            <div style={{height:'90vh'}}>
                 <h3>No Articles is there, Create One</h3>
                 <ImageNavLink 
                     to='/user/newarticle' 

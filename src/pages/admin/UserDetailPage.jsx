@@ -4,7 +4,7 @@ import ErrorElement from "../../components/UI/ErrorElement";
 
 export default function UserDetailPage(){
     const userData = useRouteLoaderData('user_details');
-    console.log(userData, 'userData in userDetail page')
+    // console.log(userData, 'userData in userDetail page')
     return(
         <>
             {(userData ?

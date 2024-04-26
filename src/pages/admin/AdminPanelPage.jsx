@@ -5,6 +5,7 @@ import allUsersImg from '../../assets/images/all_users_image.jpg';
 import ImageNavLink from "../../components/UI/ImageNavLink";
 import SideNavBar from "../../components/UI/SideNavBar";
 import { Suspense } from "react";
+import Loader from "../../components/UI/Loader";
 
 export default function AdminPanelPage(){
     
@@ -25,7 +26,7 @@ export default function AdminPanelPage(){
                 />
             </SideNavBar>
             <div>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loader/>}>
                     <Outlet />
                 </Suspense>
             </div>

@@ -6,37 +6,46 @@ import ImageNavLink from "../../components/UI/ImageNavLink";
 import classes from './ArticlesPage.module.css';
 import { fetchData } from "../../util/http_requests";
 import {useLoaderData, useRouteLoaderData} from 'react-router-dom';
-import { Suspense } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
+import Loader from "../../components/UI/Loader";
+
+// const ArticlesShow = lazy(async () => {
+//     await new Promise(resolve => setTimeout(resolve, 5000));
+//     return await import("../../components/articles/ArticlesShow");
+// });
 
 export default function ArticlesPage(){
-    
+   
+    //Router
     const allArticles = useLoaderData();
-    
+
     return(
-        <div className={classes.articles_panel}>
-         
-            <Suspense fallback={<div> Loading...</div>}>
+        <div className={classes.articles_panel}>    
+            <Suspense fallback={<Loader/>}>
                 <ArticlesShow 
                     articles={allArticles}
-                    heading={'All Articles'}
+                    // heading={'All Articles'}
                 />
             </Suspense>
-            <SideNavBar className={classes.side_nav}>
-                <ImageNavLink 
-                    to='/user/myarticles' 
-                    src={articlesImg} 
-                    alt="all users logo"
-                    imageLabel={'My Articles'}
-                    imgStyle={classes.image_style}
-                />
-                <ImageNavLink 
-                    to='/user/newarticle' 
-                    src={addArtImg} 
-                    alt="all users logo"
-                    imageLabel={'New Article'}
-                    imgStyle={classes.image_style}
-                />
-            </SideNavBar>
+
+            <div>
+                <SideNavBar className={classes.side_nav}>
+                    <ImageNavLink 
+                        to='/user/myarticles' 
+                        src={articlesImg} 
+                        alt="all users logo"
+                        imageLabel={'My Articles'}
+                        imgStyle={classes.image_style}
+                    />
+                    <ImageNavLink 
+                        to='/user/newarticle' 
+                        src={addArtImg} 
+                        alt="all users logo"
+                        imageLabel={'New Article'}
+                        imgStyle={classes.image_style}
+                    />
+                </SideNavBar>
+            </div>
         </div>
     )
 }

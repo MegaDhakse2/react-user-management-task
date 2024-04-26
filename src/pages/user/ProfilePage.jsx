@@ -12,8 +12,10 @@ export default function ProfilePage(){
     //     dispatch(userActions.setCurrentUser({user}))
     // },[])
 
-    console.log(currentUser, 'current user in users profile')
+    // console.log(currentUser, 'current user in users profile')
     return (
-        <Profile user={currentUser} isCurrentUser={true}/>
+        <div className={classes.body}>
+            <Profile user={currentUser} isCurrentUser={true}/>
+        </div>
     )
 }

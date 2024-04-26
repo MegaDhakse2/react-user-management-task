@@ -12,9 +12,11 @@ export default function EditArticlePage(){
         articleId : articleId
     }
      
-    console.log(editArticle, 'article to edit in EditArticlePage')
+    // console.log(editArticle, 'article to edit in EditArticlePage')
     return(
-        <NewArticlePage editArticle={editArticle} />
+        <div style={{paddingBottom:'2%'}}>
+            <NewArticlePage editArticle={editArticle} />
+        </div>
     )
 }
 

@@ -2,14 +2,17 @@ import ArticleForm from "../../components/articles/ArticleForm";
 import addArtHeaderImg from '../../assets/images/articles/add_article_header.png';
 import { useRef, useState } from "react";
 import ArticlePreview from "../../components/articles/ArticlePreview";
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { uploadData, uploadFile } from "../../util/http_requests";
 import { useNavigate } from "react-router-dom";
 import { ReactUdemyDBstorage } from "../../firebase/firebaseConfig";
 import { deleteFileByDownloadURL } from "../../firebase/firebaseUtil";
+import FlashMessage from "../../components/UI/FlashMessage";
+import { uiActions } from "../../store/ui";
 
 export default function NewArticlePage({editArticle}){
     //Redux
+    const dispatch = useDispatch();
     const currentUser = useSelector(state=> state.user.currentUser);
 
     //Router
@@ -44,8 +47,7 @@ export default function NewArticlePage({editArticle}){
         const fd = new FormData(event.target);
         const articleData = Object.fromEntries(fd.entries());
         articleData.author = currentUser.first_name;
-        console.log(articleData, 'article info in handlesubmit before uploading ');
-        alert('article Created successfully')
+        // console.log(articleData, 'article info in handlesubmit before uploading ');
         //Opening Preview
         articlePreviewRef.current.open();
 
@@ -77,6 +79,9 @@ export default function NewArticlePage({editArticle}){
         })
         
         navigate('/user/articles')
+        // alert('article Created successfully')
+        dispatch(uiActions.writeFlash({type: 'success', message:'Article Created Successfully.'}))
+
     }
 
     async function editnUpdateArticleData(articleData){
@@ -111,10 +116,11 @@ export default function NewArticlePage({editArticle}){
         })
         
         navigate('/user/articles')
+        dispatch(uiActions.writeFlash({type: 'success', message:'Article Edited Successfully.'}))
     }
 
     return(
-        <>
+        <div style={{paddingBottom:'2%'}}>
             {/* Article Preview Modal */}
             <ArticlePreview 
                 ref={articlePreviewRef}
@@ -127,7 +133,7 @@ export default function NewArticlePage({editArticle}){
 
             {/* Form */}
             <div>
-                <div style={{textAlign:'center', marginBottom: "-3%"}}>
+                <div style={{textAlign:'center', marginBottom: "-3%", position:'relative', zIndex:'51'}}>
                     <img src={addArtHeaderImg} width={150} height={150} />
                 </div>
                 <ArticleForm 
@@ -139,6 +145,6 @@ export default function NewArticlePage({editArticle}){
                     setIsImageURLEmpty={setIsImageURLEmpty}
                 />
             </div>
-        </>
+        </div>
     )
 }

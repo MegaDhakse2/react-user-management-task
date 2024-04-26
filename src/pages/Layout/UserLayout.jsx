@@ -6,7 +6,7 @@ import classes from './UserLayout.module.css'
 
 export default function UserLayout(){
     const isLoggedIn = useSelector((state)=> state.auth.isAuthenticated)
-    console.log(isLoggedIn, 'isAuthenticated state value')
+    // console.log(isLoggedIn, 'isAuthenticated state value')
 
     return(
             <div className={classes.body}>

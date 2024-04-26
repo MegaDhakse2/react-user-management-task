@@ -12,30 +12,31 @@ export default function MainNavigation(){
     // console.log(currentUser.role, 'currentUser role')
 
     //Styling Purpose
-    const [isSticky, setIsSticky] = useState(false);
-    const [isScrolledDown, setIsScrolledDown] = useState(false);
-    const [prevScrollY, setPrevScrollY] = useState(0);
+    // const [isSticky, setIsSticky] = useState(false);
+    // const [isScrolledDown, setIsScrolledDown] = useState(false);
+    // const [prevScrollY, setPrevScrollY] = useState(0);
 
-    //Styling Purpose
-    useEffect(() => {
-        // console.log('mainNavigation bar rerendering')
-        const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        setIsScrolledDown(currentScrollY > prevScrollY);
-        setPrevScrollY(currentScrollY);
-        setIsSticky(currentScrollY > 0);
-        };
+    // //Styling Purpose
+    // useEffect(() => {
+    //     // console.log('mainNavigation bar rerendering')
+    //     const handleScroll = () => {
+    //     const currentScrollY = window.scrollY;
+    //     setIsScrolledDown(currentScrollY > prevScrollY);
+    //     setPrevScrollY(currentScrollY);
+    //     setIsSticky(currentScrollY > 0);
+    //     };
 
-        window.addEventListener('scroll', handleScroll);
+    //     window.addEventListener('scroll', handleScroll);
 
-        return () => {
-        window.removeEventListener('scroll', handleScroll);
-        };
-    }, [prevScrollY]);
+    //     return () => {
+    //     window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, [prevScrollY]);
 
 
     return(
-        <header className={`${classes.header} ${isSticky ? classes.sticky : ''} ${isScrolledDown ? classes.smaller : ''}`}>
+        // <header className={`${classes.header} ${isSticky ? classes.sticky : ''} ${isScrolledDown ? classes.smaller : ''}`}>
+        <header className={classes.header}>
             <NavLink to='/user' style={{textDecoration:'none'}} >
             <div className={classes.title} >
                 <img 

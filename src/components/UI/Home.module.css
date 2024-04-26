@@ -2,7 +2,7 @@
     border: none;
     cursor: pointer;
     font: inherit;
-    background-color: transparent;
+    background-color: chocolate;
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
     text-decoration: none;
@@ -10,5 +10,23 @@
 }
 
 .getStarted:hover{
-    background-color: chocolate;
+    background-color: rgb(160, 72, 9);
+    color: white;
+}
+
+.welcome_block{
+    background-image: url(/src/assets/images/background_images/Inspirational_quotes.jpg);
+    opacity: 0.9;
+    width: 600px;
+    height: 500px;
+    border-radius: 2rem;
+    position: relative;
+    right: 28%;
+}
+
+.text_block{
+    position: sticky;
+    margin: 51% 27%;
+    margin-right: 2%;
+    text-align: center;
 }

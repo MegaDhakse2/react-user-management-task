@@ -6,7 +6,7 @@ import classes from './SignupPage.module.css';
 
 export default function SignupPage(){
     return(
-            <div >
+            <div className={classes.body} >
               <h2 className={classes.heading}>Sign Up here</h2>
               <UserForm method='post'/>
             </div>

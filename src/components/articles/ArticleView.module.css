@@ -1,7 +1,9 @@
 .view_block{
   padding: 2%;
   color: azure;
-  background-color: #0e5483;
+  /* background-color: #0e5483; */
+  /* background-color: #4489b7; */
+  background-color: #2d8ac9;
   /* background-image: url(/src/assets/images/articles/gold_brown_leaves_background.jpg);
    */
   border-radius: 5px;

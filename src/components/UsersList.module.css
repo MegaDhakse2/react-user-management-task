@@ -17,17 +17,17 @@
   
   .item a {
     text-decoration: none;
-    color: inherit;
+    color: white;
     display: flex;
-    background-color: bisque;
+    background-color: #124668;
     border-radius: 4px;
     overflow: hidden;
   }
   
   .item a:hover {
-    
     transform: scale(1.02);
-    background-color: rgb(54, 231, 231);
+    background-color: rgb(44, 49, 117);
+    z-index: 50;
   }
   
   .item img {

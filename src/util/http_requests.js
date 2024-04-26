@@ -1,7 +1,13 @@
-import { json, redirect } from "react-router-dom";
+import { json } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import dataStore from "../store";
+import { uiActions } from "../store/ui";
 
 export async function uploadData({data, url, method}){
+    
+    // debugger
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.startLoading());
     
     const response = await fetch(url, {
         // method: (method === 'post') ? 'POST' : 'PATCH',
@@ -13,22 +19,34 @@ export async function uploadData({data, url, method}){
     });
 
     if (!response.ok) {
+        //For Loader Purpose
+        dataStore.dispatch(uiActions.stopLoading());
+
         throw json({
             message: 'An Error Occurred, Not able to upload Data!'
         },
         {
             status: 500
         })
+        
     }
     const resData = await response.json();
+
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.stopLoading());
 
     return resData;
 }
 
 export async function fetchData({url}){
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.startLoading());
+
     const response = await fetch(url);
 
     if (!response.ok) {
+        //For Loader Purpose
+        dataStore.dispatch(uiActions.stopLoading());
         throw json(
             {
                 message: 'Unable to fetch data, Try Again'
@@ -38,6 +56,8 @@ export async function fetchData({url}){
             }
         )
     }else if(response === null){
+        //For Loader Purpose
+        dataStore.dispatch(uiActions.stopLoading());
         throw json(
             {
             message: 'No data found!'
@@ -49,7 +69,10 @@ export async function fetchData({url}){
     }
 
     const resData = await response.json();
-    console.log('Data from firebase', resData)
+    // console.log('Data from firebase', resData)
+
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.stopLoading());
     return resData;
 }
 
@@ -78,11 +101,16 @@ export async function uploadFile({file, storage, location}){
 }
 
 export async function deleteData({url}){
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.startLoading());
+
     const response = await fetch(url , {
         method: 'DELETE',
     })
 
     if (!response.ok) {
+        //For Loader Purpose
+        dataStore.dispatch(uiActions.stopLoading());
         throw json(
             {
             message: 'Could not delete!'
@@ -92,4 +120,6 @@ export async function deleteData({url}){
         }
         )
     }
+    //For Loader Purpose
+    dataStore.dispatch(uiActions.stopLoading());
 }       

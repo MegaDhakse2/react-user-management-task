@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import dashboardLogo from '../../assets/images/dashboard.jpg';
 import myProfileLogo from '../../assets/images/my_profile_logo.jpeg';
 import adminLogo from '../../assets/images/admin.jpg';
-import allUserLogo from '../../assets/images/all_users_image.jpg';
 
 export default function UserHomePage(){
     const currentUser = useSelector(state=> state.user.currentUser)
 
     return(
+        <div className={classes.body}>
             <div className={classes.img_links}>
                 <div>
                     <NavLink to='profile'>
@@ -32,5 +32,6 @@ export default function UserHomePage(){
                     </NavLink>
                 </div>}
             </div>
+        </div>
     )
 }

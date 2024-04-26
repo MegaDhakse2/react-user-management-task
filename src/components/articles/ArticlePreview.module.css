@@ -3,6 +3,7 @@
     border-radius: 8px;
     padding: 2rem;
     background-color: #d7fcf8;
+    z-index: 1000;
   }
 
   .preview_modal .article_view_block{

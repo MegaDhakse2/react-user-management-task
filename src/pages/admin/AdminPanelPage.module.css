@@ -1,4 +1,5 @@
 .admin_panel{
+    /* height: 100vh;  For background image purpose */
     display: flex;
     justify-content: space-around;
     margin-top: 2%;

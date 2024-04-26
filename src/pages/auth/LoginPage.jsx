@@ -6,10 +6,11 @@ import dataStore from "../../store";
 import { userActions } from "../../store/user";
 import classes from './LoginPage.module.css';
 import electionWallImg from '../../assets/images/elections/election_wallpaper.jpg'
+import { uiActions } from "../../store/ui";
 
 export default function LoginPage(){
     return(
-            <div>
+            <div className={classes.body}>
               <div className={classes.heading}>
                 <h2>Login Here</h2>
               </div>
@@ -28,7 +29,7 @@ export async function action({request}){
         password : data.get('password'),
     }
 
-    console.log('userData on Login form', requestedUser);
+    // console.log('userData on Login form', requestedUser);
 
     const user = await authenticateUser({auth_user: requestedUser});
 
@@ -39,7 +40,15 @@ export async function action({request}){
 
       // set Token
       setLocalToken(user.token);
+      
+      //For flash message Purpose
+      setTimeout(()=>{
+        dataStore.dispatch(uiActions.writeFlash({type:'success', message:'Tada! You have LoggedIn Successfully!, Play Around'}));
+      }, 1* 1000)
+      
+
       return redirect('/user');
+      
     } else{
       return redirect('/login')
     }

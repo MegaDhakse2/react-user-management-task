@@ -18,7 +18,7 @@ export default function LoginForm(){
         // Cleanup function to execute when the component unmounts
         return () => {
             // Perform cleanup tasks here, such as canceling subscriptions or clearing intervals
-            console.log('UserForm Component unmounted. Performing cleanup.');
+            // console.log('UserForm Component unmounted. Performing cleanup.');
             handleReset()
         };
     }, []); 
